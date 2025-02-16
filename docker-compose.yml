@@ -6,7 +6,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - .:/app
+      - ./uploads:/app/uploads
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - OPENAI_API_URL=${OPENAI_API_URL}
