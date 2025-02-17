@@ -25,9 +25,18 @@ func UploadFileHandler(c *gin.Context) {
 		return
 	}
 
+	text, err := services.ExtractTextFromFile(savePath)
+
+	if err != nil {
+		log.Printf("Error extracting text: %s", err.Error())
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to extract text from file"})
+		return
+	}
+
 	c.JSON(http.StatusOK, gin.H{
 		"message": "File uploaded successfully",
 		"file":    file.Filename,
 		"path":    savePath,
+		"content": text,
 	})
 }
