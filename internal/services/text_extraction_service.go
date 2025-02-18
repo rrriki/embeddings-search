@@ -36,10 +36,13 @@ func extractTextFromTxt(path string) (string, error) {
 }
 
 func extractTextFromPDF(path string) (string, error) {
-	fileNameWithoutExt := filepath.Base(path[:len(path)-len(filepath.Ext(path))])
-	outputFilePath := fmt.Sprintf("/app/uploads/%s.txt", fileNameWithoutExt)
+	filename := filepath.Base(path[:len(path)- len(filepath.Ext(path))])
+	uploadsDir := filepath.Join("/", "app", "uploads")
+	
+	inputFilePath := filepath.Join(uploadsDir, filename + ".pdf")
+	outputFilePath := filepath.Join(uploadsDir, filename + ".txt")
 
-	cmd := exec.Command("docker", "exec", "pdfbox", "java", "-jar", "pdfbox-app-1.8.11.jar", "ExtractText", path, outputFilePath)
+	cmd := exec.Command("docker", "exec", "pdfbox", "java", "-jar", "pdfbox-app-1.8.11.jar", "ExtractText", inputFilePath, outputFilePath)
 
 	var out bytes.Buffer
 	cmd.Stdout = &out

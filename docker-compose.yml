@@ -8,9 +8,8 @@ services:
     volumes:
       - ./uploads:/app/uploads
       - /var/run/docker.sock:/var/run/docker.sock 
-    environment:
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - OPENAI_API_URL=${OPENAI_API_URL}
+    env_file:
+      - .env
 
   pdfbox:
     image: elchubi/pdfbox

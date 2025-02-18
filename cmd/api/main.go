@@ -3,12 +3,15 @@ package main
 import (
 	"fmt"
 	"log"
-
+	"github.com/rrriki/embeddings-search/internal/storage"
 	"github.com/rrriki/embeddings-search/internal/handlers"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+	storage.InitializePinecone()
+
+
 	router := gin.Default()
 	router.SetTrustedProxies(nil)
 

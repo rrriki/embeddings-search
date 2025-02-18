@@ -5,6 +5,7 @@ import (
 	"log"
 	"mime/multipart"
 	"path/filepath"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,12 +17,12 @@ var AllowedFileTypes = map[string]bool{
 
 func SaveUploadedFile(c *gin.Context, file *multipart.FileHeader) (string, error) {
 	ext := filepath.Ext(file.Filename)
-
+	
 	if !AllowedFileTypes[ext] {
 		return "", fmt.Errorf("invalid file format: %s", ext)
 	}
-
-	savePath := fmt.Sprintf("/app/uploads/%s", file.Filename)
+	
+	savePath := filepath.Join(".", "uploads", file.Filename)
 
 	if err := c.SaveUploadedFile(file, savePath); err != nil {
 		log.Printf("Failed to save file %s: %v", savePath, err)
