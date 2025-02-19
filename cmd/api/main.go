@@ -17,7 +17,9 @@ func main() {
 
 	router.GET("/health", handlers.HealthHandler)
 
-	router.POST("upload", handlers.UploadFileHandler	)
+	router.POST("upload", handlers.UploadFileHandler)
+
+	router.POST("search", handlers.SearchHandler)
 	
 	port := "8080"
 

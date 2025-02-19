@@ -58,6 +58,7 @@ func GenerateEmbeddings(text string) ([]float32, error) {
 	if len(result.Data) == 0 {
 		return nil, fmt.Errorf("no embeddings returned from Open AI")
 	}
+
 	fmt.Printf("Fetched embeddings for text %s, tokens used: %d", text, result.Usage.TotalTokens)
 
 	return result.Data[0].Embedding, nil
